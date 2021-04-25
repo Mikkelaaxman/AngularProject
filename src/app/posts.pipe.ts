@@ -1,3 +1,4 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Pipe, PipeTransform } from '@angular/core';
 import { Post } from './entities/Post';
 
@@ -13,8 +14,8 @@ export class PostsPipe implements PipeTransform {
     // write code that filters by title and text
     // filter by comments as well?
     
-    
-    return null;
+    return posts.filter(postelement => postelement.title.toLowerCase().includes(searchInput.toLowerCase()) 
+      || postelement.text.toLowerCase().includes(searchInput.toLowerCase()))
   }
 
 }
