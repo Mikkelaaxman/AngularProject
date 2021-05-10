@@ -1,0 +1,16 @@
+
+.example-card {
+  width: 300px;
+  margin: 20px;
+}
+.flexGrid {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.flexHeader {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}

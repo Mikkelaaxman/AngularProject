@@ -13,8 +13,7 @@ import { EventActions } from '../store/actions/EventActions';
 })
 export class EventsComponent implements OnInit {
 
-  event = 'Festival';
-
+  public search: string = '';
   public events: Event[];
 
 
@@ -29,7 +28,9 @@ export class EventsComponent implements OnInit {
     this.ngRedux.select(state => state.events).subscribe(res => {
       this.events = res.events;
     });
-
   }
-
+  //TODO
+  editEventt(id: any) {
+    this.router.navigate(['neweditevent', { myId: id }])
+  }
 }
