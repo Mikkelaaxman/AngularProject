@@ -1,16 +1,11 @@
-
-.example-card {
-  width: 300px;
-  margin: 20px;
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
 }
-.flexGrid {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
 }
-
-.flexHeader {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
+table tr:nth-child(even) {
+  background-color: #ffffff;
 }
