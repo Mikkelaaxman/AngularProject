@@ -28,4 +28,9 @@ export class EventsComponent implements OnInit {
       this.events = res.events;
     });
   }
+  editEvent(id: any) {
+    this.router.navigate(['neweditevent', {myId: id}])
+  }
+
+  
 }

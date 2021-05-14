@@ -51,7 +51,7 @@ export class EventActions {
 
 
   }
-  updatePost(updatedEvent: Event) : void {
+  updateEvent(updatedEvent: Event) : void {
     this.ngRedux.dispatch({
         type: EventActions.UPDATE_EVENT,
         payload: updatedEvent
