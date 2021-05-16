@@ -45,8 +45,8 @@ export class NewediteventComponent implements OnInit {
       
   
       this.eventForm = this.fb.group({
-        title: [this.selectedEvent.event, Validators.required],
-        text: [this.selectedEvent.location, Validators.required],
+        event: [this.selectedEvent.event, Validators.required],
+        location: [this.selectedEvent.location, Validators.required],
       });
     }
   
@@ -70,8 +70,8 @@ export class NewediteventComponent implements OnInit {
           // console.log(this.selectedPost);
           // console.log(this.postForm.value);
           
-          this.selectedEvent.event = this.eventForm.value.title;
-          this.selectedEvent.location = this.eventForm.value.text;
+          this.selectedEvent.event = this.eventForm.value.event;
+          this.selectedEvent.location = this.eventForm.value.location;
           
           this.eventActions.updateEvent(this.selectedEvent);
         }

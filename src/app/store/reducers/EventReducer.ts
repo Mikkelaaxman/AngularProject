@@ -5,7 +5,7 @@ import { Event } from 'src/app/entities/Event';
 
 
 export const events = [
-    {id: "1",event: "Roskilde",date: new Date(2021,2,3), location: "Roskilde", status: "Draft"} as Event,
+    {id: "1",event: "Roskilde",date: new Date(2021,2,3), location: "Roskilde BY", status: "Draft"} as Event,
     {id: "2",event: "Tinderbox",date: new Date(2021,2,3), location: "Odense", status: "Draft"} as Event,
     {id: "3",event: "SmukFest",date: new Date(2021,2,3), location: "Skanderborg", status: "Draft"} as Event
 ];

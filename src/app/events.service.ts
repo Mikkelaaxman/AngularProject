@@ -17,6 +17,7 @@ export class EventsService extends ApiService {
   saveEvent(event: Event) {
     const token = this.ngRedux.getState().users.token;
     const url = 'https://kvalifik-a2094-default-rtdb.firebaseio.com/events.json?auth=' + token;
+  
 
     return this.http.post(url, event, this.getHttpOptions());
     // "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json?auth=<ID_TOKEN>"
