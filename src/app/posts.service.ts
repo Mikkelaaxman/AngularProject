@@ -16,7 +16,7 @@ export class PostsService extends ApiService {
 
   savePost(post: Post) {
     const token = this.ngRedux.getState().users.token;
-    const url = 'https://kvalifik-1ac56-default-rtdb.firebaseio.com/posts.json?auth=' + token;
+    const url = 'https://kvalifik-5a6b2-default-rtdb.firebaseio.com/posts.json?auth=' + token;
 
     return this.http.post(url, post, this.getHttpOptions());
     // "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json?auth=<ID_TOKEN>"
@@ -25,7 +25,8 @@ export class PostsService extends ApiService {
 
   readPosts() {
     const token = this.ngRedux.getState().users.token;
-    const url = 'https://kvalifik-1ac56-default-rtdb.firebaseio.com/posts.json?auth=' + token;
+    console.log(token)
+    const url = 'https://kvalifik-5a6b2-default-rtdb.firebaseio.com/posts.json?auth=' + token;
 
     return this.http.get(url, this.getHttpOptions());
   }
