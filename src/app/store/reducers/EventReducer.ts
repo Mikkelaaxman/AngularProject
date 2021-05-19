@@ -34,6 +34,10 @@ export function eventsReducer(state: EventState = INITIAL_STATE, action: any) {
 
         // return tassign(state, {posts: state.posts.concat(action.payload)});
         return tassign(state, {events: [...state.events, action.payload]});
+        
+    //TODO hvad gør vi med delete her? 
+/*     case EventActions.DELETE_EVENT:
+        return tassign(state, ) */
 
   //case EventActions.SET_HAPPY:
     // action.payload = true/false

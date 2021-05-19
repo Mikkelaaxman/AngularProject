@@ -13,7 +13,7 @@ export class EventActions {
   static ADD_EVENT: string = 'ADD_EVENT';
   static UPDATE_EVENT: string = 'UPDATE_EVENT';
   static READ_EVENTS: string = 'READ_EVENTS';
-
+  static DELETE_EVENT: string = 'DELETE_EVENT';
 
   readEvents() {
     this.eventsService.readEvents().subscribe((result: any) => {
@@ -55,6 +55,19 @@ export class EventActions {
     this.ngRedux.dispatch({
         type: EventActions.UPDATE_EVENT,
         payload: updatedEvent
+    });
+  }
+  deleteEvent(selectedEvent: Event): void {
+
+    this.eventsService.deleteEvent(selectedEvent).subscribe((result: any) => {
+      console.log("result from deleting");
+      console.log(result);
+
+
+    });
+    this.ngRedux.dispatch({
+      type: EventActions.DELETE_EVENT,
+      payload: selectedEvent
     });
   }
 

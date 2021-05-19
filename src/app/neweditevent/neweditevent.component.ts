@@ -75,12 +75,20 @@ export class NewediteventComponent implements OnInit {
           
           this.eventActions.updateEvent(this.selectedEvent);
         }
-        // this.tempDataService.addPost(this.selectedPost);
+
         this.router.navigate(['events']);
       }
      
     }
-  
-  
-  
+    //Måske kan man bare update med null værdier i stedet
+    onDeleteEvent(){
+      let id = this.selectedEvent.id;
+      if (id != null) {
+          this.eventActions.deleteEvent(id);
+          console.log("Event deleted with id:" + id)
+          this.router.navigate(['events']);
+        }
+      else (console.log("Selected events id is null"))
+        
+      }
   }
