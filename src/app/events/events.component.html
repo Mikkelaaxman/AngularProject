@@ -11,18 +11,13 @@
     <td>Location</td>
     <td>Date</td>
     <td>Status</td>
+    <td>Edit</td>
   <tr *ngFor="let event of events">
     <td>{{ event.id }}</td>
     <td>{{ event.event }}</td>
     <td>{{ event.location }}</td>
     <td>{{ event.date }}</td>
     <td>{{ event.status }}</td>
+    <td><app-event [event]="event" (eventClicked)="editEvent($event)"></app-event></td>
   </tr>
 </table>
-
-<div class="flexGrid"> 
-  <td> <mat-card class="example-card" *ngFor="let myevent of events"> 
-      <app-event [event]="myevent" (eventClicked)="editEvent($event)"></app-event>
-   </mat-card></td>
- </div>
-
