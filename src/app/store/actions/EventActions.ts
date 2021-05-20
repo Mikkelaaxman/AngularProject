@@ -51,8 +51,10 @@ export class EventActions {
 
 
   }
-  updateEvent(updatedEvent: Event) : void {
-
+  updateEvent(id: String, updatedEvent: Event) : void {
+    this.eventsService.updateEvent(id, updatedEvent).subscribe((result: any) => {
+      console.log("Updating event: " + updatedEvent.event)
+    })
     this.ngRedux.dispatch({
         type: EventActions.UPDATE_EVENT,
         payload: updatedEvent
