@@ -32,10 +32,10 @@ export class EventsService extends ApiService {
   }
 
   //Skal man give hele objektet eller bare string ID?? 
-  deleteEvent(event: Event) {
+  deleteEvent(id: String) {
     const token = this.ngRedux.getState().users.token;
-    const url = 'https://kvalifik-5a6b2-default-rtdb.firebaseio.com/events.json?auth=' + token;
+    const url = 'https://kvalifik-5a6b2-default-rtdb.firebaseio.com/events/' + id + '.json?auth=' + token;
 
-    return this.http.delete(url, this.getHttpOptions())
+    return this.http.delete(url, this.getHttpOptions());
   }
 }

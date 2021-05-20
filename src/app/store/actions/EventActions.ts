@@ -52,22 +52,22 @@ export class EventActions {
 
   }
   updateEvent(updatedEvent: Event) : void {
+
     this.ngRedux.dispatch({
         type: EventActions.UPDATE_EVENT,
         payload: updatedEvent
     });
   }
-  deleteEvent(selectedEvent: Event): void {
 
-    this.eventsService.deleteEvent(selectedEvent).subscribe((result: any) => {
+  deleteEvent(id: String): void {
+
+    this.eventsService.deleteEvent(id).subscribe((result: any) => {
       console.log("result from deleting");
       console.log(result);
-
-
     });
     this.ngRedux.dispatch({
       type: EventActions.DELETE_EVENT,
-      payload: selectedEvent
+      payload: id
     });
   }
 
