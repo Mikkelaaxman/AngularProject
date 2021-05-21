@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostsPipe } from './posts.pipe';
 import { NewediteventComponent } from './neweditevent/neweditevent.component';
 import { EventComponent } from './event/event.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { EventComponent } from './event/event.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
-    MatInputModule, MatCardModule, MatGridListModule, MatListModule
+    MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,9 +9,26 @@
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
+    <mat-label>Date</mat-label>
+    <input matInput id="dateInput" placeholder="date" formControlName="date">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
     <mat-label>Location</mat-label>
     <textarea matInput id="locationInput" placeholder="Write your event" formControlName="location"></textarea>
   </mat-form-field>
+
+  
+  <mat-form-field class="example-full-width">
+    <mat-label>Status</mat-label>
+    <input matInput id="StatusInput" placeholder="status" formControlName="status">
+  </mat-form-field>
+
+  <section class="example-section">
+    <mat-checkbox class="example-margin" matInput id="StatusInput" placeholder="status" formControlName="status" >OK</mat-checkbox>
+    <mat-checkbox class="example-margin" matInput id="StatusInput" placeholder="status" formControlName="status" value="Ok">Fint!</mat-checkbox>
+  </section>
+
 
   <button mat-raised-button id="saveEvent" color="primary">Save</button>
   <button mat-raised-button id="deleteEvent" color="warn" type="button" (click)="onDeleteEvent()">Delete Event</button>

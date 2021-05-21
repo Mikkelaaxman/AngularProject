@@ -8,6 +8,8 @@ import { Event } from '../entities/Event';
 import { EventActions } from '../store/actions/EventActions';
 import { AppState } from '../store/Store';
 
+
+
 @Component({
   selector: 'app-neweditevent',
   templateUrl: './neweditevent.component.html',
@@ -46,7 +48,10 @@ export class NewediteventComponent implements OnInit {
   
       this.eventForm = this.fb.group({
         event: [this.selectedEvent.event, Validators.required],
+        date: [this.selectedEvent.date, Validators.required],
         location: [this.selectedEvent.location, Validators.required],
+        status: [this.selectedEvent.status, Validators.required]
+
       });
     }
   
@@ -59,7 +64,7 @@ export class NewediteventComponent implements OnInit {
         // and then navigate to the posts component?
         if (!this.editMode) {
           this.selectedEvent = this.eventForm.value;
-          this.selectedEvent.date = new Date();
+          //this.selectedEvent.date = new Date(); giver todays date
           // this.selectedPost.id = ""+Math.random(); // temporary until we connect to a backend.
     
           // console.log(this.selectedPost);
@@ -71,7 +76,9 @@ export class NewediteventComponent implements OnInit {
           // console.log(this.postForm.value);
           
           this.selectedEvent.event = this.eventForm.value.event;
+          this.selectedEvent.date = this.eventForm.value.date;
           this.selectedEvent.location = this.eventForm.value.location;
+          this.selectedEvent.status = this.eventForm.value.status;
           
           this.eventActions.updateEvent(this.selectedEvent.id, this.selectedEvent);
         }
