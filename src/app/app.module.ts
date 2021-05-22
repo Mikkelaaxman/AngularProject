@@ -30,6 +30,8 @@ import { PostsPipe } from './posts.pipe';
 import { NewediteventComponent } from './neweditevent/neweditevent.component';
 import { EventComponent } from './event/event.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule} from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
-    MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule
+    MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
+    MatTableModule, MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

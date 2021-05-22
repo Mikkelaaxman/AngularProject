@@ -87,7 +87,7 @@ export class NewediteventComponent implements OnInit {
       }
      
     }
-    //Måske kan man bare update med null værdier i stedet
+
     onDeleteEvent(){
       let id: String = this.selectedEvent.id;
       if (id != null) {
