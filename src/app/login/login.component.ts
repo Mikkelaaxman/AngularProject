@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       // Send the data to the server to verify the user login
       // navigate after successful login.
       this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
-
+      
 
     }
 

@@ -1,59 +1,61 @@
 <div class="flexHeader">
   <h3>Events</h3>
-  <button mat-raised-button color="primary" routerLink="/neweditevent" id="newEventBtn">New Event</button>
+  <button #newEventBtn mat-raised-button disabled color="primary" routerLink="/neweditevent">New Event</button>
 </div>
 
-  <div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div>
-  <div>
-<!--we could use observable datasource with connect and disconnect, 
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<div>
+  <!--we could use observable datasource with connect and disconnect, 
   but for now its just the array, so we have to call renderRows() on table on change-->
-<table #upcoming mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table #upcoming mat-table [dataSource]="dataSource" mat-elevation-z8>
 
-  <!--- Note that these columns can be defined in any order.
+    <!--If no data or not logged in-->
+    <h3 *matNoDataRow>Please log in to see upcoming events</h3>
+
+    <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Eventname Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Eventname </th>
-    <td mat-cell *matCellDef="let event"> {{event.event}} </td>
-  </ng-container>
+    <!-- Eventname Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Eventname </th>
+      <td mat-cell *matCellDef="let event"> {{event.event}} </td>
+    </ng-container>
 
-  <!-- Location Column -->
-  <ng-container matColumnDef="location">
-    <th mat-header-cell *matHeaderCellDef> Location </th>
-    <td mat-cell *matCellDef="let event"> {{event.location}} </td>
-  </ng-container>
+    <!-- Location Column -->
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef> Location </th>
+      <td mat-cell *matCellDef="let event"> {{event.location}} </td>
+    </ng-container>
 
-  <!-- Date Column -->
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let event"> {{event.date}} </td>
-  </ng-container>
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let event"> {{event.date}} </td>
+    </ng-container>
 
-  <!-- Status Column -->
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status </th>
-    <td mat-cell *matCellDef="let event"> {{event.status}} </td>
-  </ng-container>
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let event"> {{event.status}} </td>
+    </ng-container>
 
-  <!-- Edit button Column-->
-  <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef> Edit </th>
-    <td mat-cell *matCellDef="let event">
-      <app-event [event]="event" (eventClicked)="editEvent($event)"></app-event>
-    </td>
-  </ng-container>
+    <!-- Edit button Column-->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let event">
+        <app-event [event]="event" (eventClicked)="editEvent($event)"></app-event>
+      </td>
+    </ng-container>
 
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
-  [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex">
-</mat-paginator>
+    <!-- maybe [colSpan]="displayedColumns.length" to make better layout ? -->
+    <tr [colSpan]="displayedColumns.length" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
+    [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex">
+  </mat-paginator>
 </div>

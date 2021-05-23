@@ -7,6 +7,7 @@ import { AppState } from '../store/Store';
 import { EventActions } from '../store/actions/EventActions';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-events',
@@ -19,6 +20,7 @@ export class EventsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['date', 'name', 'location', 'status', 'edit'];
   @ViewChild('upcoming') upcomingTable: MatTable<Event>;
   @ViewChild('upcomingPaginator') upcomingPaginator: MatPaginator;
+  @ViewChild('newEventBtn') newEventBtn: MatButton;
 
   dataSource = new MatTableDataSource<Event>();
 
@@ -26,30 +28,36 @@ export class EventsComponent implements OnInit, AfterViewInit {
     private ngRedux: NgRedux<AppState>, private eventActions: EventActions) { }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.upcomingPaginator;
-    this.length = this.events.length / this.pageSize; //Setting number of pages to match number of events
-    console.log("AfterView init")
+
   }
 
   ngOnInit(): void {
 
-
-    //We want to show a temp message until logged in
-    //this.events = this.tempDataEventService.getEvents();
-
     this.eventActions.readEvents();
 
     this.ngRedux.select(state => state.events).subscribe(res => {
-      this.events = res.events;
-      this.dataSource = new MatTableDataSource<Event>(this.events);
+     
+
+      this.events = res.events; //sets events array to response 
+
+      if (this.events.length > 0) { //If there exists events  
+        this.dataSource = new MatTableDataSource<Event>(this.events); //creates datasource for table with events array
+        console.log(this.dataSource);
+        this.newEventBtn.disabled = false;  //TODO Doesnt work 
+
+        this.length = this.events.length / this.pageSize ; //Setting number of pages to match number of events
+        this.dataSource.paginator = this.upcomingPaginator; //add paginator to the datasource 
+
+      }
     });
 
-  
+
+
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    //TODO this.events.filter = filterValue;
+    this.dataSource.filter = filterValue;
   }
 
   length = 0;
