@@ -17,7 +17,7 @@ import { MatButton } from '@angular/material/button';
 export class EventsComponent implements OnInit, AfterViewInit {
 
   public events: Event[];
-  displayedColumns: string[] = ['date', 'name', 'location', 'status', 'edit'];
+  displayedColumns: string[] = ['date', 'name', 'location','description', 'status', 'edit'];
   @ViewChild('upcoming') upcomingTable: MatTable<Event>;
   @ViewChild('upcomingPaginator') upcomingPaginator: MatPaginator;
   @ViewChild('newEventBtn') newEventBtn: MatButton;
