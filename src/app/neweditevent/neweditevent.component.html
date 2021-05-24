@@ -1,5 +1,3 @@
-<p>neweditevent works!</p>
-
 <h3>{{headerTitle}}</h3>
 
 <form [formGroup]="eventForm" (ngSubmit)="onSubmitEvent()">
@@ -13,9 +11,13 @@
     <textarea matInput id="locationInput" placeholder="Write your event" formControlName="location"></textarea>
   </mat-form-field>
 
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput id="descriptionInput" placeholder="Write about your event" formControlName="description"></textarea>
+  </mat-form-field>
+
   <div class="example-wrapper">
-    <h2>RangeFrom & RangeTo Selection</h2>
-  
+    <h2>RangeFrom & RangeTo Selection</h2>  
     <label class="example-input-wrapper">
       Date Time Range From:
       <input formControlName="date" placeholder="Date Time Range From:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeFrom'"
