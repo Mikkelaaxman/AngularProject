@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 
 import { NgRedux } from '@angular-redux/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,19 +7,22 @@ import { DataService } from '../data.service';
 import { Event } from '../entities/Event';
 import { EventActions } from '../store/actions/EventActions';
 import { AppState } from '../store/Store';
-
+import { DateTimeAdapter, OwlDateTimeComponent, OwlDateTimeModule } from 'ng-pick-datetime'
 
 
 @Component({
   selector: 'app-neweditevent',
   templateUrl: './neweditevent.component.html',
-  styleUrls: ['./neweditevent.component.scss']
+  styleUrls: ['./neweditevent.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewediteventComponent implements OnInit {
   public selectedEvent: Event;
   public eventForm: FormGroup;
   public headerTitle: String = 'Create New Event';
   public editMode: boolean = false;
+  public dateTimeRange: Date[];
+
 
   constructor(private route: ActivatedRoute, private tempDataService: DataService,
     private fb: FormBuilder, private router: Router, private eventActions: EventActions,
@@ -32,7 +35,6 @@ export class NewediteventComponent implements OnInit {
         this.headerTitle = "Edit Event";
         this.editMode = true;
       }
-  
       
       // this.selectedPost = this.tempDataService.getPosts().find(post => post.id === id);
       this.ngRedux.select(state => state.events).subscribe(res => {
