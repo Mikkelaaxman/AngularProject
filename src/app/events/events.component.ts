@@ -3,21 +3,22 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataEventService } from '../data-event.service'
 import { Event } from '../entities/Event'
-import { AppState } from '../store/Store';
+import { AppState, UserState } from '../store/Store';
 import { EventActions } from '../store/actions/EventActions';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatButton } from '@angular/material/button';
+import { usersReducer } from '../store/reducers/UserReducer';
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent implements OnInit, AfterViewInit {
+export class EventsComponent implements OnInit {
 
   public events: Event[];
-  displayedColumns: string[] = ['date', 'name', 'location', 'status', 'edit'];
+  displayedColumns: string[] = ['date', 'name', 'location','description', 'status', 'edit'];
   @ViewChild('upcoming') upcomingTable: MatTable<Event>;
   @ViewChild('upcomingPaginator') upcomingPaginator: MatPaginator;
   @ViewChild('newEventBtn') newEventBtn: MatButton;
@@ -26,10 +27,6 @@ export class EventsComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router, private tempDataEventService: DataEventService,
     private ngRedux: NgRedux<AppState>, private eventActions: EventActions) { }
-
-  ngAfterViewInit(): void {
-
-  }
 
   ngOnInit(): void {
 
@@ -43,12 +40,14 @@ export class EventsComponent implements OnInit, AfterViewInit {
       if (this.events.length > 0) { //If there exists events  
         this.dataSource = new MatTableDataSource<Event>(this.events); //creates datasource for table with events array
         console.log(this.dataSource);
-        this.newEventBtn.disabled = false;  //TODO Doesnt work 
+        this.newEventBtn.disabled = false;
 
         this.length = this.events.length / this.pageSize ; //Setting number of pages to match number of events
         this.dataSource.paginator = this.upcomingPaginator; //add paginator to the datasource 
 
       }
+
+      //if(UserState.LOGGED_IN ... )
     });
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 
 import { NgRedux } from '@angular-redux/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,19 +7,22 @@ import { DataService } from '../data.service';
 import { Event } from '../entities/Event';
 import { EventActions } from '../store/actions/EventActions';
 import { AppState } from '../store/Store';
-
+import { DateTimeAdapter, OwlDateTimeComponent, OwlDateTimeModule } from 'ng-pick-datetime'
 
 
 @Component({
   selector: 'app-neweditevent',
   templateUrl: './neweditevent.component.html',
-  styleUrls: ['./neweditevent.component.scss']
+  styleUrls: ['./neweditevent.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewediteventComponent implements OnInit {
   public selectedEvent: Event;
   public eventForm: FormGroup;
   public headerTitle: String = 'Create New Event';
   public editMode: boolean = false;
+  public dateTimeRange: Date[];
+
 
   constructor(private route: ActivatedRoute, private tempDataService: DataService,
     private fb: FormBuilder, private router: Router, private eventActions: EventActions,
@@ -32,7 +35,6 @@ export class NewediteventComponent implements OnInit {
         this.headerTitle = "Edit Event";
         this.editMode = true;
       }
-  
       
       // this.selectedPost = this.tempDataService.getPosts().find(post => post.id === id);
       this.ngRedux.select(state => state.events).subscribe(res => {
@@ -50,6 +52,7 @@ export class NewediteventComponent implements OnInit {
         event: [this.selectedEvent.event, Validators.required],
         date: [this.selectedEvent.date, Validators.required],
         location: [this.selectedEvent.location, Validators.required],
+        description: [this.selectedEvent.description, Validators.required],
         status: [this.selectedEvent.status, Validators.required]
 
       });
@@ -78,6 +81,7 @@ export class NewediteventComponent implements OnInit {
           this.selectedEvent.event = this.eventForm.value.event;
           this.selectedEvent.date = this.eventForm.value.date;
           this.selectedEvent.location = this.eventForm.value.location;
+          this.selectedEvent.description = this.eventForm.value.description;
           this.selectedEvent.status = this.eventForm.value.status;
          
           
