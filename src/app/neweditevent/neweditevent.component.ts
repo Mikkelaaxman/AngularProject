@@ -8,6 +8,8 @@ import { Event } from '../entities/Event';
 import { EventActions } from '../store/actions/EventActions';
 import { AppState } from '../store/Store';
 import { DateTimeAdapter, OwlDateTimeComponent, OwlDateTimeModule } from 'ng-pick-datetime'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @Component({

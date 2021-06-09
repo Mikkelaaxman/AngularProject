@@ -32,6 +32,7 @@ export class EventsComponent implements OnInit {
 
     this.eventActions.readEvents();
 
+    
     this.ngRedux.select(state => state.events).subscribe(res => {
      
 
@@ -39,14 +40,16 @@ export class EventsComponent implements OnInit {
 
       if (this.events.length > 0) { //If there exists events  
         this.dataSource = new MatTableDataSource<Event>(this.events); //creates datasource for table with events array
-        console.log(this.dataSource);
-        this.newEventBtn.disabled = false;
+        this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
 
-        this.length = this.events.length / this.pageSize ; //Setting number of pages to match number of events
-        this.dataSource.paginator = this.upcomingPaginator; //add paginator to the datasource 
+         //add paginator to the datasource 
+        this.dataSource.paginator = this.upcomingPaginator;
 
-      }
+        this.length = this.dataSource.paginator.getNumberOfPages(); //Setting number of pages to match number of events
 
+    }
+      
+      
       //if(UserState.LOGGED_IN ... )
     });
 

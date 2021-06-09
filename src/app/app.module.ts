@@ -31,6 +31,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     HttpClientModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
     MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatCheckboxModule,
-    MatTableModule, MatPaginatorModule, OwlDateTimeModule, OwlNativeDateTimeModule
+    MatTableModule, MatPaginatorModule, OwlDateTimeModule, OwlNativeDateTimeModule,
+    MatSlideToggleModule, MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
