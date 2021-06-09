@@ -39,6 +39,17 @@
     <mat-checkbox class="example-margin" matInput id="StatusInput" placeholder="status" formControlName="status">Save as draft</mat-checkbox>
   </section>
 
+  <section class = "example-section">
+  <mat-slide-toggle>Pinned</mat-slide-toggle>
+  </section>
+
+  <section class = "example-section">
+  <select>Responsible</select>
+  </section>
+
+  <section class = "example-section">
+    <select>Collaboration</select>
+    </section>
 
   <button mat-raised-button id="saveEvent" color="primary">Save</button>
   <button mat-raised-button id="deleteEvent" color="warn" type="button" (click)="onDeleteEvent()">Delete Event</button>
