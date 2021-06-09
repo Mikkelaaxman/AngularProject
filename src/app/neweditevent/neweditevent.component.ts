@@ -79,6 +79,7 @@ export class NewediteventComponent implements OnInit {
           this.selectedEvent.date = this.eventForm.value.date;
           this.selectedEvent.location = this.eventForm.value.location;
           this.selectedEvent.status = this.eventForm.value.status;
+         
           
           this.eventActions.updateEvent(this.selectedEvent.id, this.selectedEvent);
         }
