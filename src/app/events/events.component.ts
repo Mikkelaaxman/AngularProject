@@ -18,7 +18,7 @@ import { usersReducer } from '../store/reducers/UserReducer';
 export class EventsComponent implements OnInit {
 
   public events: Event[];
-  displayedColumns: string[] = ['date', 'name', 'location','description', 'status', 'edit'];
+  displayedColumns: string[] = ['date', 'name', 'location', 'description', 'status', 'edit'];
   @ViewChild('upcoming') upcomingTable: MatTable<Event>;
   @ViewChild('upcomingPaginator') upcomingPaginator: MatPaginator;
   @ViewChild('newEventBtn') newEventBtn: MatButton;
@@ -32,9 +32,9 @@ export class EventsComponent implements OnInit {
 
     this.eventActions.readEvents();
 
-    
+
     this.ngRedux.select(state => state.events).subscribe(res => {
-     
+
 
       this.events = res.events; //sets events array to response 
 
@@ -42,19 +42,19 @@ export class EventsComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Event>(this.events); //creates datasource for table with events array
         this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
 
-         //add paginator to the datasource 
+        //add paginator to the datasource 
         this.dataSource.paginator = this.upcomingPaginator;
+        //Setting number of pages
+        this.length = this.dataSource.paginator.getNumberOfPages(); 
+        
+/*         this.events.forEach(event => {
+          if(new Date(event.date).getDate < new Date().getDate){
 
-        this.length = this.dataSource.paginator.getNumberOfPages(); //Setting number of pages to match number of events
-
-    }
-      
-      
-      //if(UserState.LOGGED_IN ... )
+            event.status == "PAST"
+          } 
+        });*/
+      }
     });
-
-
-
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

@@ -63,20 +63,11 @@ export class NewediteventComponent implements OnInit {
       
       if (this.eventForm.valid){
         
-        // Can you store this post object in the temp. data service 
-        // and then navigate to the posts component?
         if (!this.editMode) {
           this.selectedEvent = this.eventForm.value;
-          //this.selectedEvent.date = new Date(); giver todays date
-          // this.selectedPost.id = ""+Math.random(); // temporary until we connect to a backend.
-    
-          // console.log(this.selectedPost);
-          
           this.eventActions.addEvent(this.selectedEvent);
+          
         } else {
-          // console.log("call update");
-          // console.log(this.selectedPost);
-          // console.log(this.postForm.value);
           
           this.selectedEvent.event = this.eventForm.value.event;
           this.selectedEvent.date = this.eventForm.value.date;
