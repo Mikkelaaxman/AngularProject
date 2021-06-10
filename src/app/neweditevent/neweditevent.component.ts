@@ -8,6 +8,8 @@ import { Event } from '../entities/Event';
 import { EventActions } from '../store/actions/EventActions';
 import { AppState } from '../store/Store';
 import { DateTimeAdapter, OwlDateTimeComponent, OwlDateTimeModule } from 'ng-pick-datetime'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @Component({
@@ -74,6 +76,7 @@ export class NewediteventComponent implements OnInit {
           this.selectedEvent.location = this.eventForm.value.location;
           this.selectedEvent.description = this.eventForm.value.description;
           this.selectedEvent.status = this.eventForm.value.status;
+         
           
           this.eventActions.updateEvent(this.selectedEvent.id, this.selectedEvent);
         }

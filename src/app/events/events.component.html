@@ -1,6 +1,8 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div class="flexHeader">
   <h3>Events</h3>
-  <button #newEventBtn mat-raised-button disabled color="primary" routerLink="/neweditevent">New Event</button>
+  <button #newEventBtn mat-raised-button color="primary" routerLink="/neweditevent">New Event</button>
 </div>
 
 <div class="example-header">
@@ -11,7 +13,7 @@
 <div>
   <!--we could use observable datasource with connect and disconnect, 
   but for now its just the array, so we have to call renderRows() on table on change-->
-  <table #upcoming mat-table [dataSource]="dataSource" mat-elevation-z8>
+  <table class="styled-table" #upcoming mat-table [dataSource]="dataSource" mat-elevation-z8>
 
     <!--If no data or not logged in-->
     <h3 *matNoDataRow>Please log in to see upcoming events</h3>
@@ -22,25 +24,28 @@
     <!-- Eventname Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Eventname </th>
-      <td mat-cell *matCellDef="let event"> {{event.event}} </td>
+      <td mat-cell *matCellDef="let event"><mat-icon>event</mat-icon> {{event.event}} </td>
     </ng-container>
 
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef> Location </th>
-      <td mat-cell *matCellDef="let event"> {{event.location}} </td>
+      <td mat-cell *matCellDef="let event"><mat-icon>location_on</mat-icon> {{event.location}} </td>
     </ng-container>
 
     <!-- Date Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let event"> {{event.date}} </td>
+      <td mat-cell *matCellDef="let event" ><mat-icon>access_time</mat-icon> {{event.date}} </td>
+      <td></td>
     </ng-container>
+
+  
 
     <!--Description Column-->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> description </th>
-      <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+      <td mat-cell *matCellDef="let event"><mat-icon>description</mat-icon> {{event.description}} </td>
     </ng-container>
 
     <!-- Status Column -->
