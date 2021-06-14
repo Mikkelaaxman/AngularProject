@@ -16,4 +16,12 @@ export class AppPage {
   async clickNewPostButton() {
     await element(by.id('newPostBtn')).click();
   }
+
+  getEventPage(){
+    return element(by.css('[routerLink="events"]'));
+  }
+
+  getEventPageText(){
+    return element(by.css('app-events h3')).getText();
+  }
 }

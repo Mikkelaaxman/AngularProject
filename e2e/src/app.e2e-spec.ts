@@ -1,6 +1,7 @@
 import { browser, by, element, logging } from 'protractor';
 import { AppPage } from './app.po';
 
+
 describe('workspace-project App', () => {
   let page: AppPage;
 
@@ -12,6 +13,18 @@ describe('workspace-project App', () => {
   //   await page.navigateTo();
   //   expect(await page.getTitleText()).toEqual('kvalifik app is running!');
   // });
+
+    it('shoud display Event page', async () =>{
+      await page.navigateTo();
+      expect(await page.getEventPage().getText()).toEqual("Events");
+    });
+
+    it('shoud display route Event page', async () =>{
+      await page.navigateTo();
+      await page.getEventPage().click();
+
+      expect(await page.getEventPageText()).toEqual("Events");
+    });
 
   
 
