@@ -30,26 +30,23 @@ describe('Posts section', () => {
         expect(await element(by.css("h3")).getText()).toEqual("Create New Post");
     });
 
-    it('Create new post', async() => {
-        await helper.navigateToPosts();
-        // await browser.sleep(500);
-        const postsBeforeAdding: number = await (await element.all(by.tagName('mat-card'))).length;
-        // expect(postsBeforeAdding.length).toEqual(0);
+    // it('Create new post', async() => {
+    //     await helper.navigateToPosts();
+    //     // await browser.sleep(500);
+    //     const postsBeforeAdding: number = await (await element.all(by.tagName('mat-card'))).length;
+    //     // expect(postsBeforeAdding.length).toEqual(0);
 
-        await helper.clickNewPostButton();
-        // await browser.sleep(500);
-        await element(by.id('titleInput')).sendKeys('Test Post');
-        await element(by.id('textInput')).sendKeys('This is the text of the Test Post');
-        await element(by.id('savePost')).click();
+    //     await helper.clickNewPostButton();
+    //     // await browser.sleep(500);
+    //     await element(by.id('titleInput')).sendKeys('Test Post');
+    //     await element(by.id('textInput')).sendKeys('This is the text of the Test Post');
+    //     await element(by.id('savePost')).click();
 
-        const postsAfterAdding: number = await (await element.all(by.tagName('mat-card'))).length;
+    //     const postsAfterAdding: number = await (await element.all(by.tagName('mat-card'))).length;
 
-        expect(postsAfterAdding).toEqual(postsBeforeAdding + 1); // try to make more robust test-code
+    //     expect(postsAfterAdding).toEqual(postsBeforeAdding + 1); // try to make more robust test-code
         // instead of hardcoding numbers, like 5 and 6.
         // expect(postsBeforeAdding.length).toEqual(1);
 
-     
-        
-
-    });
+    //});
 });

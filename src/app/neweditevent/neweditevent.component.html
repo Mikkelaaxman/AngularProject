@@ -1,9 +1,12 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <h3>{{headerTitle}}</h3>
 
 <form [formGroup]="eventForm" (ngSubmit)="onSubmitEvent()">
+  
   <mat-form-field class="example-full-width">
     <mat-label>Event</mat-label>
-    <input matInput id="eventInput" placeholder="Event" formControlName="event">
+    <textarea matInput id="eventInput" placeholder="Event" formControlName="event"></textarea>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
@@ -16,18 +19,18 @@
     <textarea matInput id="descriptionInput" placeholder="Write about your event" formControlName="description"></textarea>
   </mat-form-field>
 
+
   <div class="example-wrapper">
-    <h2>RangeFrom & RangeTo Selection</h2>  
     <label class="example-input-wrapper">
       Date Time Range From:
-      <input formControlName="date" placeholder="Date Time Range From:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeFrom'"
+      <input class="input-wrapper" formControlName="date" placeholder="Date Time Range From:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeFrom'"
         [owlDateTimeTrigger]="dtRange2" [owlDateTime]="dtRange2">
       <owl-date-time #dtRange2></owl-date-time>
     </label>
   
     <label class="example-input-wrapper">
       Date Time Range To:
-      <input placeholder="Date Time Range To:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeTo'"
+      <input class="input-wrapper" placeholder="Date Time Range To:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeTo'"
         [owlDateTimeTrigger]="dtRange3" [owlDateTime]="dtRange3">
       <owl-date-time #dtRange3></owl-date-time>
     </label>
@@ -35,11 +38,11 @@
     <h4>Value From Picker: {{dateTimeRange}}</h4>
   </div>
 
-  <section class="example-section">
+  <section class="status-section">
     <mat-checkbox class="example-margin" matInput id="StatusInput" placeholder="status" formControlName="status">Save as draft</mat-checkbox>
   </section> 
 
-  <section class = "example-section">
+  <section class = "status-section">
   <mat-slide-toggle>Pinned</mat-slide-toggle>
   </section>
 
@@ -51,7 +54,12 @@
     <select>Collaboration</select>
     </section>
 
+<div class="button-wrapper">
   <button mat-raised-button id="saveEvent" color="primary">Save</button>
+</div>
+  
+<div class="button-wrapper">
   <button mat-raised-button id="deleteEvent" color="warn" type="button" (click)="onDeleteEvent()">Delete Event</button>
+</div>
 
 </form>
