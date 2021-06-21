@@ -18,7 +18,7 @@ import { usersReducer } from '../store/reducers/UserReducer';
 export class EventsComponent implements OnInit {
 
   public events: Event[];
-  displayedColumns: string[] = ['date', 'name', 'location', 'description', 'status', 'edit'];
+  displayedColumns: string[] = ['fromDate', "toDate", 'name', 'location', 'description', 'status', 'edit'];
   @ViewChild('upcoming') upcomingTable: MatTable<Event>;
   @ViewChild('upcomingPaginator') upcomingPaginator: MatPaginator;
   @ViewChild('newEventBtn') newEventBtn: MatButton;
@@ -32,27 +32,33 @@ export class EventsComponent implements OnInit {
 
     this.eventActions.readEvents();
 
-
+   // this.ngRedux.getState())
     this.ngRedux.select(state => state.events).subscribe(res => {
+     this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
 
 
       this.events = res.events; //sets events array to response 
 
       if (this.events.length > 0) { //If there exists events  
         this.dataSource = new MatTableDataSource<Event>(this.events); //creates datasource for table with events array
-        this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
 
         //add paginator to the datasource 
         this.dataSource.paginator = this.upcomingPaginator;
         //Setting number of pages
         this.length = this.dataSource.paginator.getNumberOfPages(); 
         
-/*         this.events.forEach(event => {
-          if(new Date(event.date).getDate < new Date().getDate){
+        /*         //Comparing date to today and setting status to past or older events
+                for (let index = 0; index < this.events.length; index++) {
+                  const event = this.events[index];
+        
+                  if (new Date(event.date) < new Date()) {  //TODO change to toDate
+                    this.dataSourcePast.data.push(event)
 
-            event.status == "PAST"
-          } 
-        });*/
+                  }
+                  else {
+                   // this.dataSource.data.push(event)
+                  }  //fills upcoming table datasource
+                } */
       }
     });
   }
@@ -76,5 +82,16 @@ export class EventsComponent implements OnInit {
     this.router.navigate(['neweditevent', { myId: id }])
   }
 
-
+/* NOT NEEDED found out about angular datepipe formatting date right in html :) 
+  dateFormatter(datetime) {
+    const date = datetime;
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    const minutes = date.getMinutes();
+    const hours = date.getHours();
+    const seconds = date.getSeconds();
+    const myFormattedDate = day + "-" + (monthIndex + 1) + "-" + year + " " + hours + ":" + minutes + ":" + seconds;
+    return myFormattedDate;
+  } */
 }
