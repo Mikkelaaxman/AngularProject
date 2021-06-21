@@ -23,19 +23,19 @@
   <div class="example-wrapper">
     <label class="example-input-wrapper">
       Date Time Range From:
-      <input class="input-wrapper" formControlName="fromDate" placeholder="Date Time Range From:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeFrom'"
+      <input class="input-wrapper" formControlName="fromDate" placeholder="Date Time Range From:" [selectMode]="'rangeFrom'"
         [owlDateTimeTrigger]="dtRange2" [owlDateTime]="dtRange2">
-      <owl-date-time #dtRange2></owl-date-time>
+      <owl-date-time  #dtRange2></owl-date-time>
     </label>
   
     <label class="example-input-wrapper">
       Date Time Range To:
-      <input class="input-wrapper" formControlName="toDate" placeholder="Date Time Range To:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeTo'"
+      <input class="input-wrapper" formControlName="toDate" placeholder="Date Time Range To:" [selectMode]="'rangeTo'"
         [owlDateTimeTrigger]="dtRange3" [owlDateTime]="dtRange3">
-      <owl-date-time #dtRange3></owl-date-time>
+      <owl-date-time  #dtRange3></owl-date-time>
     </label>
  
-    <h4>Value From Picker: {{dateTimeRange}}</h4>
+    <h4>Value From Picker: {{eventForm.value.fromDate[0]}} to {{eventForm.value.toDate[1]}}</h4>
   </div>
 
   <h4>Save as:</h4>

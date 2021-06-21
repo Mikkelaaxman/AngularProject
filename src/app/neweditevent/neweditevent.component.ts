@@ -63,7 +63,7 @@ export class NewediteventComponent implements OnInit {
   
     onSubmitEvent() {
       console.log(this.eventForm);
-      
+      console.log("FromDate: " + this.eventForm.value.dtRange2)
       if (this.eventForm.valid){
         
         if (!this.editMode) {
