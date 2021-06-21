@@ -30,7 +30,7 @@
   
     <label class="example-input-wrapper">
       Date Time Range To:
-      <input class="input-wrapper" fromControlName="toDate" placeholder="Date Time Range To:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeTo'"
+      <input class="input-wrapper" formControlName="toDate" placeholder="Date Time Range To:" [(ngModel)]="dateTimeRange" [selectMode]="'rangeTo'"
         [owlDateTimeTrigger]="dtRange3" [owlDateTime]="dtRange3">
       <owl-date-time #dtRange3></owl-date-time>
     </label>
@@ -38,9 +38,16 @@
     <h4>Value From Picker: {{dateTimeRange}}</h4>
   </div>
 
-  <section class="status-section">
-    <mat-checkbox class="example-margin" matInput id="StatusInput" placeholder="status" formControlName="status">Save as draft</mat-checkbox>
-  </section> 
+  <h4>Save as:</h4>
+  <mat-form-field appearance="fill">
+    <mat-select id="StatusInput" placeholder="status" formControlName="status">
+      <mat-option value="Draft">Draft</mat-option> 
+      <mat-option value="Published">Published</mat-option>
+      <mat-option value="Expired">Expired</mat-option>
+      <mat-option value="Cancelled">Cancelled</mat-option>
+    </mat-select>
+  </mat-form-field>
+
 
   <section class = "status-section">
   <mat-slide-toggle>Pinned</mat-slide-toggle>
