@@ -33,6 +33,8 @@ export class EventsComponent implements OnInit {
     this.eventActions.readEvents();
 
    // this.ngRedux.getState())
+
+   
     this.ngRedux.select(state => state.events).subscribe(res => {
      this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
 

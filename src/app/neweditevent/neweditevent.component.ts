@@ -53,7 +53,7 @@ export class NewediteventComponent implements OnInit {
       this.eventForm = this.fb.group({
         event: [this.selectedEvent.event, Validators.required],
         fromDate: [this.selectedEvent.fromDate, Validators.required],
-        toDate: [this.selectedEvent.fromDate, Validators.required],
+        toDate: [this.selectedEvent.toDate, Validators.required],
         location: [this.selectedEvent.location, Validators.required],
         description: [this.selectedEvent.description, Validators.required],
         status: [this.selectedEvent.status, Validators.required]
