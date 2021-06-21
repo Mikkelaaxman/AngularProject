@@ -13,7 +13,7 @@ export class PostState {
 }
 
 export class EventState {
-    //Boolean draft senere
+    //Boolean draft senere?
     events: Event[];
 }
 
@@ -21,21 +21,16 @@ export class UserState {
     loggedInUser: User;
     token: string;
 }
-// export class EventState {
-//     events: Event[];
-// }
 
 export class AppState {
     posts?: PostState;
     users?: UserState;
-
-    // events?: EventState;
     events?: EventState;
 }
+
 export const rootReducer = combineReducers<AppState>({
     posts: postsReducer,
     users: usersReducer,
-    // events: eventsReducer,
     events: eventsReducer
     // router: routerReducer
 });
