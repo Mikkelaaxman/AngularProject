@@ -23,6 +23,8 @@ export class EventsComponent implements OnInit {
   @ViewChild('upcomingPaginator') upcomingPaginator: MatPaginator;
   @ViewChild('newEventBtn') newEventBtn: MatButton;
 
+  public pinned: Event;
+
   dataSource = new MatTableDataSource<Event>();
 
   constructor(private router: Router, private tempDataEventService: DataEventService,
@@ -32,12 +34,12 @@ export class EventsComponent implements OnInit {
 
     this.eventActions.readEvents();
 
-   // this.ngRedux.getState())
-
-   
     this.ngRedux.select(state => state.events).subscribe(res => {
-     this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
+      this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
 
+      //gets currently pinned event and sets header to its event name
+      this.pinned = res.isPinned;
+      document.getElementById("pinnedHeader").innerHTML = (<string>this.pinned.event);
 
       this.events = res.events; //sets events array to response 
 
@@ -47,8 +49,8 @@ export class EventsComponent implements OnInit {
         //add paginator to the datasource 
         this.dataSource.paginator = this.upcomingPaginator;
         //Setting number of pages
-        this.length = this.dataSource.paginator.getNumberOfPages(); 
-        
+        this.length = this.dataSource.paginator.getNumberOfPages();
+
         /*         //Comparing date to today and setting status to past or older events
                 for (let index = 0; index < this.events.length; index++) {
                   const event = this.events[index];
@@ -84,16 +86,16 @@ export class EventsComponent implements OnInit {
     this.router.navigate(['neweditevent', { myId: id }])
   }
 
-/* NOT NEEDED found out about angular datepipe formatting date right in html :) 
-  dateFormatter(datetime) {
-    const date = datetime;
-    const day = date.getDate();
-    const monthIndex = date.getMonth();
-    const year = date.getFullYear();
-    const minutes = date.getMinutes();
-    const hours = date.getHours();
-    const seconds = date.getSeconds();
-    const myFormattedDate = day + "-" + (monthIndex + 1) + "-" + year + " " + hours + ":" + minutes + ":" + seconds;
-    return myFormattedDate;
-  } */
+  /* NOT NEEDED found out about angular datepipe formatting date right in html :) 
+    dateFormatter(datetime) {
+      const date = datetime;
+      const day = date.getDate();
+      const monthIndex = date.getMonth();
+      const year = date.getFullYear();
+      const minutes = date.getMinutes();
+      const hours = date.getHours();
+      const seconds = date.getSeconds();
+      const myFormattedDate = day + "-" + (monthIndex + 1) + "-" + year + " " + hours + ":" + minutes + ":" + seconds;
+      return myFormattedDate;
+    } */
 }

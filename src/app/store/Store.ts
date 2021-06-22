@@ -14,6 +14,7 @@ export class PostState {
 
 export class EventState {
     //Boolean draft senere?
+    isPinned: Event;
     events: Event[];
 }
 

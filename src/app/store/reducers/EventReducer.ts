@@ -5,8 +5,9 @@ import { Event } from 'src/app/entities/Event';
 
 
 export const events = [];
+const initEvent = {id:"-1", event:"Pinned Event Here", location:" ", fromDate: new Date(), toDate: new Date(), description:" ", status:" "} as Event;
 
-const INITIAL_STATE: EventState = {events: events};
+const INITIAL_STATE: EventState = {isPinned: initEvent, events: events};
 
 export function eventsReducer(state: EventState = INITIAL_STATE, action: any) {
  switch (action.type) {
@@ -35,14 +36,12 @@ export function eventsReducer(state: EventState = INITIAL_STATE, action: any) {
     case EventActions.DELETE_EVENT:
         return tassign(state, {events: state.events.filter(event=>event.id!==action.payload)})
 
-  //case EventActions.SET_HAPPY:
-    // action.payload = true/false
-    // state.isHappy = action.payload; // mutating the old state object.
-    // return Object.assign({}, state, {isHappys: action.payload});
+  case EventActions.SET_PINNED:
 
-    // state.isHappy = action.payload;
+    //Mutating old state object
+    state.isPinned = action.payload;
     // return state;
-    //return tassign(state, { isHappy: action.payload });
+    return tassign(state, { isPinned: action.payload });
 
    default:
     return state;

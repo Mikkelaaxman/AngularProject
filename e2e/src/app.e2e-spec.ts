@@ -19,11 +19,11 @@ describe('workspace-project App', () => {
       expect(await page.getEventPage().getText()).toEqual("Events");
     });
 
-    it('shoud display route Event page', async () =>{
+    it('should display route Event page', async () =>{
       await page.navigateTo();
       await page.getEventPage().click();
 
-      expect(await page.getEventPageText()).toEqual("Events");
+      expect(await page.getEventPageText()).toEqual("Upcoming Events");
     });
 
   

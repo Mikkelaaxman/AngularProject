@@ -14,6 +14,7 @@ export class EventActions {
   static UPDATE_EVENT: string = 'UPDATE_EVENT';
   static READ_EVENTS: string = 'READ_EVENTS';
   static DELETE_EVENT: string = 'DELETE_EVENT';
+  static SET_PINNED: string = "SET_PINNED"
 
   readEvents() {
     this.eventsService.readEvents().subscribe((result: any) => {
@@ -73,4 +74,11 @@ export class EventActions {
     });
   }
 
+  setType(isPinned: Event): void {
+
+    this.ngRedux.dispatch({
+      type: EventActions.SET_PINNED,
+      payload: isPinned
+    });
+  }
 }

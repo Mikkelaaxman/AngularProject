@@ -16,6 +16,14 @@ export class AppPage {
   async clickNewPostButton() {
     await element(by.id('newPostBtn')).click();
   }
+  
+  async clickNewEventButton() {
+    await element(by.id("newEventBtn")).click()
+  }
+
+  async navigateToEvents() {
+    await element(by.id(".e2e-events")).click();
+  }
 
   getEventPage(){
     return element(by.css('[routerLink="events"]'));

@@ -1,5 +1,14 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<section class="pinned-section">
+<h2>Pinned Event:
+  <h3 id="pinnedHeader"></h3>
+</h2>
+<div> </div>
+ 
+</section>
+<mat-divider></mat-divider>
+<div> </div>
 <div class="flexHeader">
   <h3>Upcoming Events</h3>
   <button #newEventBtn mat-raised-button disabled="true" color="primary" routerLink="/neweditevent">New Event</button>
@@ -11,9 +20,8 @@
   </mat-form-field>
 </div>
 <div>
-  
-  <!--we could use observable datasource with connect and disconnect, 
-  but for now its just the array, so we have to call renderRows() on table on change-->
+
+  <!--EVENTS TABLE -->
   <table class="styled-table" #upcoming mat-table [dataSource]="dataSource" mat-elevation-z8>
 
     <!--If no data or not logged in-->
@@ -25,41 +33,52 @@
     <!-- Eventname Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Eventname </th>
-      <td mat-cell *matCellDef="let event"><mat-icon>event</mat-icon> {{event.event}} </td>
+      <td mat-cell *matCellDef="let event">
+        <mat-icon>event</mat-icon> {{event.event}}
+      </td>
     </ng-container>
 
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef> Location </th>
-      <td mat-cell *matCellDef="let event"><mat-icon>location_on</mat-icon> {{event.location}} </td>
+      <td mat-cell *matCellDef="let event">
+        <mat-icon>location_on</mat-icon> {{event.location}}
+      </td>
     </ng-container>
 
     <!-- Date Column -->
     <ng-container matColumnDef="fromDate">
       <th mat-header-cell *matHeaderCellDef> From Date </th>
-      <td mat-cell *matCellDef="let event" ><mat-icon>access_time</mat-icon> {{event.fromDate[0] | date:'medium'}} </td>
-      <td></td>
+      <td mat-cell *matCellDef="let event">
+        <mat-icon>access_time</mat-icon> {{event.fromDate[0] | date:'medium'}}
+      </td>
+
     </ng-container>
     <!-- Date Column -->
     <ng-container matColumnDef="toDate">
       <th mat-header-cell *matHeaderCellDef> To Date </th>
       <td mat-cell *matCellDef="let event">
-        <mat-icon>access_time</mat-icon> {{event.toDate[1] | date: 'medium'}}</td>
-      <td></td>
+        <mat-icon>access_time</mat-icon> {{event.toDate[1] | date: 'medium'}}
+      </td>
+
     </ng-container>
     <!--Description Column-->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let event"><mat-icon>description</mat-icon> {{event.description}} </td>
+      <td mat-cell *matCellDef="let event">
+        <mat-icon>description</mat-icon> {{event.description}}
+      </td>
     </ng-container>
 
     <!-- Status Column -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <!-- Using ngIfElse, if status is true it is a draft, else show #published -->
-      <td mat-cell *matCellDef="let event"><mat.icon></mat.icon> {{event.status}} </td>
+      <td mat-cell *matCellDef="let event">
+        <mat.icon></mat.icon> {{event.status}}
+      </td>
     </ng-container>
-  
+
     <!-- Edit button Column-->
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> Edit </th>

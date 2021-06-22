@@ -3,68 +3,99 @@
 <h3>{{headerTitle}}</h3>
 
 <form [formGroup]="eventForm" (ngSubmit)="onSubmitEvent()">
-  
+
   <mat-form-field class="example-full-width">
-    <mat-label>Event</mat-label>
-    <textarea matInput id="eventInput" placeholder="Event" formControlName="event"></textarea>
+    <mat-label>Event Title</mat-label>
+    <input matInput id="eventInput" placeholder="Event" formControlName="event">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Location</mat-label>
-    <textarea matInput id="locationInput" placeholder="Write your event" formControlName="location"></textarea>
+    <input matInput id="locationInput" placeholder="Location" formControlName="location">
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Description</mat-label>
-    <textarea matInput id="descriptionInput" placeholder="Write about your event" formControlName="description"></textarea>
-  </mat-form-field>
-
-
-  <div class="example-wrapper">
-    <label class="example-input-wrapper">
-      Date Time Range From:
-      <input class="input-wrapper" formControlName="fromDate" placeholder="Date Time Range From:" [selectMode]="'rangeFrom'"
-        [owlDateTimeTrigger]="dtRange2" [owlDateTime]="dtRange2">
-      <owl-date-time  #dtRange2></owl-date-time>
-    </label>
-  
-    <label class="example-input-wrapper">
-      Date Time Range To:
-      <input class="input-wrapper" formControlName="toDate" placeholder="Date Time Range To:" [selectMode]="'rangeTo'"
-        [owlDateTimeTrigger]="dtRange3" [owlDateTime]="dtRange3">
-      <owl-date-time  #dtRange3></owl-date-time>
-    </label>
+  <div class="example-section">
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput id="descriptionInput" placeholder="Write about your event"
+        formControlName="description"></textarea>
+    </mat-form-field>
   </div>
 
+  <div class="example-wrapper">
+    <mat-label> Date From: </mat-label>
+    <input id="fromDate" formControlName="fromDate" placeholder="Choose a start date:" [selectMode]="'rangeFrom'"
+      [owlDateTimeTrigger]="dtRange2" [owlDateTime]="dtRange2">
+    <owl-date-time #dtRange2></owl-date-time>
+
+
+    <mat-label>Date To:</mat-label>
+    <input id="toDate" formControlName="toDate" placeholder="Choose an end date:" [selectMode]="'rangeTo'"
+      [owlDateTimeTrigger]="dtRange3" [owlDateTime]="dtRange3">
+    <owl-date-time #dtRange3></owl-date-time>
+
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+
+  <label for="input-file-id">Choose Image File</label>
+  <input mat-raised-button color="secondary" single type="file" accept="image/*" onchange="loadFile(event)">
+  <img id="output" />
+
+  <mat-divider></mat-divider>
+
+  <section class="status-section">
+    <mat-label>Pin to Top of event page</mat-label>
+    <mat-slide-toggle id="pinnedInput" formControlName="pinned">Pinned</mat-slide-toggle>
+
+  </section>
+
+  <section class="example-section">
+    <mat-form-field>
+      <mat-label>Responsible</mat-label>
+      <mat-select placeholder="Responsible">
+        <mat-option>-- None --</mat-option>
+        <mat-option value="option1">Option 1</mat-option>
+        <mat-option value="option2">Option 2</mat-option>
+        <mat-hint>Not implemented yet</mat-hint>
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <section class="example-section">
+    <mat-form-field>
+      <mat-label>Collaboration</mat-label>
+      <mat-select placeholder="Collaboration">
+        <mat-option>-- None --</mat-option>
+        <mat-option value="option1">Option 1</mat-option>
+        <mat-option value="option2">Option 2</mat-option>
+        <mat-hint>Not implemented yet</mat-hint>
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <mat-divider></mat-divider>
+
   <h4>Save as:</h4>
-  <mat-form-field appearance="fill">
+  <mat-form-field>
+    <mat-label>Choose status</mat-label>
     <mat-select id="StatusInput" placeholder="status" formControlName="status">
-      <mat-option value="Draft">Draft</mat-option> 
+      <mat-option value="Draft">Draft</mat-option>
       <mat-option value="Published">Published</mat-option>
       <mat-option value="Expired">Expired</mat-option>
       <mat-option value="Cancelled">Cancelled</mat-option>
     </mat-select>
   </mat-form-field>
 
+  <div class="button-wrapper">
+    <button mat-raised-button id="saveEvent" color="primary">Save</button>
+  </div>
 
-  <section class = "status-section">
-  <mat-slide-toggle>Pinned</mat-slide-toggle>
-  </section>
-
-  <section class = "example-section">
-  <select>Responsible</select>
-  </section>
-
-  <section class = "example-section">
-    <select>Collaboration</select>
-    </section>
-
-<div class="button-wrapper">
-  <button mat-raised-button id="saveEvent" color="primary">Save</button>
-</div>
-  
-<div class="button-wrapper">
-  <button mat-raised-button id="deleteEvent" color="warn" type="button" (click)="onDeleteEvent()">Delete Event</button>
-</div>
+  <div class="button-wrapper">
+    <button mat-raised-button id="deleteEvent" color="warn" type="button" (click)="onDeleteEvent()">Delete
+      Event</button>
+  </div>
 
 </form>
