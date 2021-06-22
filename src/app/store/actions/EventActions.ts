@@ -73,7 +73,7 @@ export class EventActions {
       payload: id
     });
   }
-
+  //"event " happened and is send to store 
   setType(isPinned: Event): void {
 
     this.ngRedux.dispatch({

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { EventEmitter, Output } from '@angular/core';
 import { Event } from '../entities/Event';
 
+//CHILD COMPONENT for events
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',

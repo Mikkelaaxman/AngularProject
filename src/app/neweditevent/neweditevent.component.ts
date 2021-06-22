@@ -26,8 +26,10 @@ export class NewediteventComponent implements OnInit {
   public dateTimeRange: Date[];
   public pinned: Event;
   public isPinned: Boolean = false;
+  public error: String;
+  public success: String;
 
-  constructor(private route: ActivatedRoute, private tempDataService: DataService,
+  constructor(private route: ActivatedRoute,
     private fb: FormBuilder, private router: Router, private eventActions: EventActions,
     private ngRedux: NgRedux<AppState>) { }
 
@@ -39,12 +41,13 @@ export class NewediteventComponent implements OnInit {
       this.editMode = true;
     }
 
-    // this.selectedPost = this.tempDataService.getPosts().find(post => post.id === id);
+    //Extract state from appstate and subscribe to changes to events
     this.ngRedux.select(state => state.events).subscribe(res => {
-      this.selectedEvent = res.events.find(event => event.id === id);
-      this.pinned = res.isPinned;
+      this.selectedEvent = res.events.find(event => event.id === id); //find the event
+      this.pinned = res.isPinned; //Get currently pinned event
 
     });
+    //If theres no event found, we want to create new event instead
     if (this.selectedEvent === undefined) {
       this.selectedEvent = new Event();
     }
@@ -74,6 +77,12 @@ export class NewediteventComponent implements OnInit {
   onSubmitEvent() {
     console.log(this.eventForm);
     console.log("FromDate: " + this.eventForm.value.dtRange2)
+
+    // reset alerts on submit
+    this.error = null;
+    this.success = null;
+
+
     if (this.eventForm.valid) {
 
       if (!this.editMode) {
@@ -91,8 +100,12 @@ export class NewediteventComponent implements OnInit {
         
         if (this.eventForm.value.pinned) { this.setPinned(this.selectedEvent) } //IF eventform pinned slider is true notify isPinned of state change
 
-
+        try {
         this.eventActions.updateEvent(this.selectedEvent.id, this.selectedEvent);
+          this.success = "Success"
+        } catch (error) {
+          this.error = error;
+        }
       }
 
       this.router.navigate(['events']);

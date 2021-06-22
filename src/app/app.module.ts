@@ -71,7 +71,7 @@ export class AppModule {
     private ngReduxRouter: NgReduxRouter,) {
 
     this.ngRedux.configureStore(rootReducer, {}, [], [devTool.isEnabled() ? devTool.enhancer() : f => f]);
-    //    this.ngRedux.configureStore(rootReducer, {});
+
 
     ngReduxRouter.initialize(/* args */);
   }

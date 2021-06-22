@@ -10,9 +10,10 @@ import { UserActions } from '../store/actions/UserActions';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  error: string;
+  success: string;
   // DI - Dependency injection
-  constructor(private fb: FormBuilder, private router: Router, 
+  constructor(private fb: FormBuilder, private router: Router,
     private userActions: UserActions) {
   }
 
@@ -30,12 +31,22 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     console.log(this.loginForm);
 
+    // reset alerts on submit
+    this.error = null;
+    this.success = null;
+
     if (this.loginForm.valid) {
-      
+
       // Send the data to the server to verify the user login
       // navigate after successful login.
-      this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
-      
+      try {       
+         this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
+
+        this.success = "You have logged in"
+      } catch (error) {
+        this.error = error;
+      }
+
 
     }
 

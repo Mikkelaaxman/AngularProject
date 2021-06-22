@@ -13,8 +13,9 @@ export class PostState {
 }
 
 export class EventState {
-    //Boolean draft senere?
-    isPinned: Event;
+    //isDraft: boolean;
+    //Store sender videre til reducer, som sender tilbage igen så store opdaterer state
+    isPinned: Event;  //bare pinned?, ikke en bool
     events: Event[];
 }
 

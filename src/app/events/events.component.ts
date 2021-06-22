@@ -27,7 +27,7 @@ export class EventsComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Event>();
 
-  constructor(private router: Router, private tempDataEventService: DataEventService,
+  constructor(private router: Router,
     private ngRedux: NgRedux<AppState>, private eventActions: EventActions) { }
 
   ngOnInit(): void {
@@ -39,7 +39,9 @@ export class EventsComponent implements OnInit {
 
       //gets currently pinned event and sets header to its event name
       this.pinned = res.isPinned;
-      document.getElementById("pinnedHeader").innerHTML = (<string>this.pinned.event);
+      //document.getElementById("pinHeader").innerHTML = (<string>this.pinned.event);
+     // document.getElementById("pinLocation").innerHTML = (<string>this.pinned.location);
+ 
 
       this.events = res.events; //sets events array to response 
 
