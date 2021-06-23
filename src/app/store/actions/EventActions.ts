@@ -73,8 +73,8 @@ export class EventActions {
       payload: id
     });
   }
-  //"event " happened and is send to store 
-  setType(isPinned: Event): void {
+  //"an event" happened and is send to store 
+  setPinned(isPinned: Event): void {
 
     this.ngRedux.dispatch({
       type: EventActions.SET_PINNED,

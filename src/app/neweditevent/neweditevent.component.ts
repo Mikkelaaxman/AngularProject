@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 import { NgRedux } from '@angular-redux/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { AppState } from '../store/Store';
 import { DateTimeAdapter, OwlDateTimeComponent, OwlDateTimeModule } from 'ng-pick-datetime'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+
 
 
 @Component({
@@ -26,8 +27,8 @@ export class NewediteventComponent implements OnInit {
   public dateTimeRange: Date[];
   public pinned: Event;
   public isPinned: Boolean = false;
-  public error: String;
-  public success: String;
+
+  @Output() alertSend: EventEmitter<any> = new EventEmitter<any>(); //bubbles up to parent 
 
   constructor(private route: ActivatedRoute,
     private fb: FormBuilder, private router: Router, private eventActions: EventActions,
@@ -52,7 +53,7 @@ export class NewediteventComponent implements OnInit {
       this.selectedEvent = new Event();
     }
     // console.log(this.selectedPost);
-   // if (this.selectedEvent.id == this.pinned.id) { this.isPinned = true }
+    // if (this.selectedEvent.id == this.pinned.id) { this.isPinned = true }
 
     this.eventForm = this.fb.group({
       event: [this.selectedEvent.event, Validators.required],
@@ -64,7 +65,6 @@ export class NewediteventComponent implements OnInit {
       pinned: [this.isPinned]
     });
   }
-
 
   loadFile(event) {
     let output = document.getElementById('output');
@@ -78,17 +78,16 @@ export class NewediteventComponent implements OnInit {
     console.log(this.eventForm);
     console.log("FromDate: " + this.eventForm.value.dtRange2)
 
-    // reset alerts on submit
-    this.error = null;
-    this.success = null;
-
-
     if (this.eventForm.valid) {
 
       if (!this.editMode) {
         this.selectedEvent = this.eventForm.value;
         this.eventActions.addEvent(this.selectedEvent);
-        if(this.eventForm.value.pinned){this.setPinned(this.selectedEvent)} //IF eventform pinned slider is true notify isPinned of state change
+        if (this.eventForm.value.pinned) { this.setPinned(this.selectedEvent) } //IF eventform pinned slider is true notify isPinned of state change
+        
+        //Bubble up alert to events page
+        this.alertEvent("Event Created Successfully")
+
       } else {
 
         this.selectedEvent.event = this.eventForm.value.event;
@@ -97,18 +96,24 @@ export class NewediteventComponent implements OnInit {
         this.selectedEvent.location = this.eventForm.value.location;
         this.selectedEvent.description = this.eventForm.value.description;
         this.selectedEvent.status = this.eventForm.value.status;
-        
+
         if (this.eventForm.value.pinned) { this.setPinned(this.selectedEvent) } //IF eventform pinned slider is true notify isPinned of state change
+        //TODO Or remove Pinned if it was true before
 
         try {
-        this.eventActions.updateEvent(this.selectedEvent.id, this.selectedEvent);
-          this.success = "Success"
+          this.eventActions.updateEvent(this.selectedEvent.id, this.selectedEvent);
+          this.alertEvent("Event Updated Successfully")
         } catch (error) {
-          this.error = error;
+          //Will probably never happen
+          this.alertEvent(error)
         }
       }
 
       this.router.navigate(['events']);
+    }
+    else {
+      //TODO Wont be seen yet
+      this.alertEvent("Please fill out all forms")
     }
 
   }
@@ -125,6 +130,12 @@ export class NewediteventComponent implements OnInit {
   }
 
   setPinned(pinned: Event): void {
-    this.eventActions.setType(pinned);
+    this.eventActions.setPinned(pinned);
+  }
+
+  alertEvent(message: string): void {
+    console.log("Message send from edit event: " + message)
+    this.alertSend.emit(message); //bubbles
+    //I should make an alert component instead
   }
 }

@@ -11,14 +11,15 @@ import { Event } from '../entities/Event';
 })
 export class EventComponent implements OnInit {
   @Input() event: Event;
-  @Output() eventClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output() eventClicked: EventEmitter<any> = new EventEmitter<any>(); //bubbles up to parent 
 
   constructor() { }
 
   ngOnInit(): void {
   }
+  
   editEvent(id: string): void {
-    this.eventClicked.emit(id);
+    this.eventClicked.emit(id); //bubbles
   }
 
 }

@@ -1,19 +1,24 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div *ngIf="alert" class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  {{alert}}
+</div>
+
 <ng-template #nopin><h3>Pinned Event: Log in to see Pinned Event</h3></ng-template>
+
 <section class="pinned-section" *ngIf="pinned; else nopin">
-
-
 <h3>Pinned Event:</h3>
 
 <mat-card class="example-card" >
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title id="pinHeader" >{{pinned.event}}</mat-card-title>
-    <mat-card-subtitle id="pinLocation">{{pinned.location}}</mat-card-subtitle>
+    <mat-card-title id="pinHeader" >Title: {{pinned.event}}</mat-card-title>
+    <mat-card-subtitle id="pinLocation">Location: {{pinned.location}}</mat-card-subtitle>
   </mat-card-header>
  <!--  <img mat-card-image src="" id="pinImage" alt="Pinned event photo"> --> 
   <mat-card-content>
-    <p id="pinDescription">{{pinned.description}}</p>
+    <p id="pinDescription">Description: {{pinned.description}}</p>
     <p id="pinStartDate">{{pinned.startDate}}</p>
   </mat-card-content>
 </mat-card>

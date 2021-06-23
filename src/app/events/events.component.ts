@@ -1,5 +1,5 @@
 import { NgRedux } from '@angular-redux/store';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataEventService } from '../data-event.service'
 import { Event } from '../entities/Event'
@@ -22,10 +22,12 @@ export class EventsComponent implements OnInit {
   @ViewChild('upcoming') upcomingTable: MatTable<Event>;
   @ViewChild('upcomingPaginator') upcomingPaginator: MatPaginator;
   @ViewChild('newEventBtn') newEventBtn: MatButton;
-
   public pinned: Event;
-
   dataSource = new MatTableDataSource<Event>();
+
+  //TODO This alert system. needs an alert component
+  public alert: String;
+  @Input() message: string;
 
   constructor(private router: Router,
     private ngRedux: NgRedux<AppState>, private eventActions: EventActions) { }
@@ -35,13 +37,10 @@ export class EventsComponent implements OnInit {
     this.eventActions.readEvents();
 
     this.ngRedux.select(state => state.events).subscribe(res => {
-      this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual LOGGED_IN 
+      this.newEventBtn.disabled = false;  //Unlocks the ability to create new events. TODO Should maybe be tied to an actual "authenticated" state
 
       //gets currently pinned event and sets header to its event name
       this.pinned = res.isPinned;
-      //document.getElementById("pinHeader").innerHTML = (<string>this.pinned.event);
-     // document.getElementById("pinLocation").innerHTML = (<string>this.pinned.location);
- 
 
       this.events = res.events; //sets events array to response 
 
@@ -86,6 +85,11 @@ export class EventsComponent implements OnInit {
   }
   editEvent(id: any) {
     this.router.navigate(['neweditevent', { myId: id }])
+  }
+
+  alertEvent(message) {
+    console.log("Message received in Events: " + message)
+    this.alert = message; //Input from child neweditevent
   }
 
   /* NOT NEEDED found out about angular datepipe formatting date right in html :) 

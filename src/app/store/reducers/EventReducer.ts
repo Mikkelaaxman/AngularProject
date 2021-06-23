@@ -12,7 +12,9 @@ const INITIAL_STATE: EventState = { isPinned: initEvent, events: events };
 // "Event handler" der ikke mutater objects
 export function eventsReducer(state: EventState = INITIAL_STATE, action: any) {
     switch (action.type) {
+
         case EventActions.READ_EVENTS:
+
             return tassign(state, { events: action.payload });
 
         case EventActions.UPDATE_EVENT:
@@ -38,13 +40,13 @@ export function eventsReducer(state: EventState = INITIAL_STATE, action: any) {
             return tassign(state, { events: state.events.filter(event => event.id !== action.payload) })
 
         case EventActions.SET_PINNED:
-/* 
-            // mutating object
-            state.events.push(action.payload)
-
-            //Mutating old state object
-            state.isPinned = action.payload;
- */
+            /* 
+                        // mutating object
+                        state.events.push(action.payload)
+            
+                        //Mutating old state object
+                        state.isPinned = action.payload;
+             */
             // return state immutable. could also use Immer, Immutable or Mori packages? 
             return tassign(state, { isPinned: action.payload });
 
