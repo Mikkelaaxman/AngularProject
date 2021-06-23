@@ -45,3 +45,8 @@ testem.log
 .DS_Store
 Thumbs.db
 package-lock.json
+
+# Vulnerables
+/posts.service.ts
+/events.service.ts
+/app.service.ts

@@ -87,6 +87,7 @@ export class EventsComponent implements OnInit {
     this.router.navigate(['neweditevent', { myId: id }])
   }
 
+  //TODO Get from alert component instead
   alertEvent(message) {
     console.log("Message received in Events: " + message)
     this.alert = message; //Input from child neweditevent

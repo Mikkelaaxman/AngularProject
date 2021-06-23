@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
       try {       
          this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
 
+         
         this.success = "You have logged in"
       } catch (error) {
         this.error = error;

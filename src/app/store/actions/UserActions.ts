@@ -33,7 +33,7 @@ export class UserActions {
 
         this.authService.getUserInfo(result.idToken).subscribe((response : any) => {
           console.log("getUserInfo");
-          console.log(response);
+          console.log("Response : " + response);
           
           user.signupDate = new Date(Number(response.users[0].createdAt));
 
